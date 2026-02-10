@@ -1,0 +1,88 @@
+Problem Statement 5: Student Engagement and Retention in a University Program
+Organization (fictitious): Northview University – Student Success Office
+Industry Vertical: Higher Education / Student Services
+Problem Description: The Student Success Office at Northview University supports thousands
+of undergraduates through advising, tutoring, and co-curricular programs. Despite many
+available resources, student engagement is uneven, and early signs of disengagement often
+go unnoticed until academic performance declines. Advisors rely on manual tracking and
+fragmented systems, making it difficult to proactively support students at risk. The office seeks
+a more systematic and scalable approach to monitoring engagement while respecting student
+autonomy.
+Potential Software Solution (Outline): A student engagement monitoring and support tool
+that integrates academic signals, participation data, and self-reported inputs. The software
+could use AI to flag risk patterns, recommend targeted interventions, and provide students
+with personalized nudges and resources through a user-friendly interface.
+Persona: Laura Martinez
+Role: Academic Advisor
+Background: Master’s in Higher Education Administration
+Context & Motivation: Laura supports hundreds of students and worries she only learns about
+problems when it’s too late. She wants early signals of disengagement and practical tools to
+intervene constructively, without feeling like she is surveilling students or overwhelming them
+with messages.
+Primary Actors and Roles
+• Primary User: Academic Advisor (Laura Martinez)
+• Secondary Users: Students, advising supervisors
+• System Actor: Academic and engagement datasets
+Core User Goals
+• Identify early signs of student disengagement
+• Intervene constructively and ethically
+• Prioritize advising attention effectively
+• Support student success without excessive monitoring
+Core Functional Requirements
+1. FR-1: Signal Aggregation
+The system shall combine multiple engagement indicators into a unified view.
+2. FR-2: Risk Pattern Identification
+The system shall highlight patterns suggesting disengagement.
+3. FR-3: Advisor Dashboard
+The system shall present a prioritized list of students needing attention.
+4. FR-4: Intervention Support
+The system shall suggest appropriate outreach actions or resources.
+5. FR-5: Student-Facing Feedback (Optional)
+The system may provide students with reflective feedback or nudges.
+6. FR-6: Outcome Tracking
+The system shall track advisor actions and subsequent student outcomes.
+Non-Functional Requirements
+Usability
+• Clear prioritization over raw metrics
+• Low cognitive load for advisors
+Ethics & Privacy
+• Transparency about data use
+• Avoid “black box” labeling of students
+Explainability
+• Advisors must understand why a student is flagged
+Performance
+• Dashboards should load quickly for large caseloads
+Constraints & Assumptions
+• No automated disciplinary action
+• Academic grading systems are out of scope
+Minimum Viable Feature (MVP) Set
+MVP Objective: Support earlier, more targeted advising interventions without increasing
+advisor burden.
+Recommended MVP Features
+1. MVP-1: Student List View
+Display students with engagement indicators.
+2. MVP-2: Risk Indicator Flags
+Highlight students showing concerning patterns.
+3. MVP-3: Explanation Panel
+Show which signals contributed to flags.
+4. MVP-4: Intervention Log
+Record advisor outreach actions.
+5. MVP-5: Simple Analytics View
+Show engagement trends over time.
+6. MVP-6: Advisor Notes
+Capture qualitative context.
+3. Should-Have (Post-MVP) Features
+• Student self-reflection interface
+• Predictive modeling
+• Automated but opt-in nudges
+• Cross-unit collaboration notes
+• Outcome dashboards
+4. MVP Success Metrics
+• Advisors can prioritize attention confidently
+• Interventions are explainable and defensible
+• Students perceive outreach as supportive
+• System enables reflection, not surveillance
+5. Student Build Simplifications
+• Synthetic student data
+• Limited signal types
+• Focus on ethical design articulation
