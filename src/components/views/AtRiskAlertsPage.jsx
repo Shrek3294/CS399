@@ -5,6 +5,15 @@ const escalatedAlerts = [
     reason: "No class attendance for 9 days and 4 missed advising sessions",
     owner: "Dr. Martinez",
     due: "Today",
+    momentum: "Worsening",
+    momentumTrend: "down",
+    lastContact: "No successful contact in 7 days",
+    nextStep: "Same-day phone call and emergency advising slot",
+    whyFlagged: [
+      "Attendance dropped from 82% to 49% this month",
+      "Four missed advising appointments",
+      "No LMS activity for over a week",
+    ],
   },
   {
     name: "Noah Patel",
@@ -12,6 +21,15 @@ const escalatedAlerts = [
     reason: "Failed two quizzes and no LMS logins this week",
     owner: "Jennifer Taylor",
     due: "Feb 12",
+    momentum: "Worsening",
+    momentumTrend: "down",
+    lastContact: "Phone outreach 2 days ago",
+    nextStep: "Assign tutoring referral and follow up within 24h",
+    whyFlagged: [
+      "Two failed quizzes in core classes",
+      "No LMS logins for 6 days",
+      "Missed one scheduled lab support session",
+    ],
   },
   {
     name: "James Chen",
@@ -19,6 +37,15 @@ const escalatedAlerts = [
     reason: "Sustained engagement decline across two core classes",
     owner: "Robert Park",
     due: "Feb 14",
+    momentum: "Stable",
+    momentumTrend: "stable",
+    lastContact: "Advisor email yesterday",
+    nextStep: "Confirm scheduled intervention and monitor attendance",
+    whyFlagged: [
+      "Attendance down 14% across two courses",
+      "Reduced discussion board participation",
+      "Assignment completion trend below baseline",
+    ],
   },
 ];
 
@@ -48,6 +75,30 @@ const alertTimeline = [
   "10:10 AM - Advisor outreach sent to Noah Patel",
   "11:30 AM - James Chen moved from high to medium risk",
   "01:20 PM - Two new watch list students auto-flagged",
+];
+
+const communicationLog = [
+  {
+    student: "Sarah Mitchell",
+    when: "Today, 9:10 AM",
+    channel: "SMS + voicemail",
+    owner: "Dr. Martinez",
+    note: "No response, second attempt due by 2:00 PM",
+  },
+  {
+    student: "Noah Patel",
+    when: "Yesterday, 4:25 PM",
+    channel: "Phone call",
+    owner: "Jennifer Taylor",
+    note: "Student asked for tutoring referral details",
+  },
+  {
+    student: "James Chen",
+    when: "Yesterday, 11:50 AM",
+    channel: "Advisor email",
+    owner: "Robert Park",
+    note: "Meeting confirmed for Feb 13 at 1:00 PM",
+  },
 ];
 
 function AtRiskAlertsPage() {
@@ -83,7 +134,9 @@ function AtRiskAlertsPage() {
                 <tr>
                   <th>Student</th>
                   <th>Priority</th>
+                  <th>Risk Momentum</th>
                   <th>Reason</th>
+                  <th>Last Contact</th>
                   <th>Owner</th>
                   <th>Due</th>
                 </tr>
@@ -94,7 +147,11 @@ function AtRiskAlertsPage() {
                   <tr key={item.name}>
                     <td>{item.name}</td>
                     <td>{item.priority}</td>
+                    <td>
+                      <span className={`momentum-badge ${item.momentumTrend}`}>{item.momentum}</span>
+                    </td>
                     <td>{item.reason}</td>
+                    <td>{item.lastContact}</td>
                     <td>{item.owner}</td>
                     <td>{item.due}</td>
                   </tr>
@@ -121,10 +178,44 @@ function AtRiskAlertsPage() {
 
       <section className="detail-grid">
         <article className="card detail-panel">
+          <h2>Why Flagged & Next Best Action</h2>
+          <ul className="flagged-list">
+            {escalatedAlerts.map((item) => (
+              <li key={`${item.name}-explanation`}>
+                <p className="flagged-title">{item.name}</p>
+                <p className="flagged-summary">{item.priority} priority case</p>
+                <ul className="flagged-reasons">
+                  {item.whyFlagged.map((reason) => (
+                    <li key={`${item.name}-${reason}`}>{reason}</li>
+                  ))}
+                </ul>
+                <p className="flagged-next">
+                  <strong>Recommended next step:</strong> {item.nextStep}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <article className="card detail-panel">
           <h2>Intervention SLA Rules</h2>
           <ul className="simple-list">
             {interventionSla.map((item) => (
               <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </article>
+      </section>
+
+      <section className="detail-grid">
+        <article className="card detail-panel">
+          <h2>Last Contact & Communication History</h2>
+          <ul className="timeline-list">
+            {communicationLog.map((item) => (
+              <li key={`${item.student}-${item.when}`}>
+                <strong>{item.student}</strong>: {item.when} - {item.channel} ({item.owner}) -{" "}
+                {item.note}
+              </li>
             ))}
           </ul>
         </article>

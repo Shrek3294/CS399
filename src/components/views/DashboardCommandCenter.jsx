@@ -37,6 +37,15 @@ const alerts = [
     risk: "High Risk",
     signals: "Missed 4 advising sessions - No tutoring attendance",
     tint: "high",
+    momentum: "Worsening",
+    momentumTrend: "down",
+    lastContact: "No outreach logged",
+    whyFlagged: [
+      "No class check-ins for 9 days",
+      "4 missed advising sessions in 3 weeks",
+      "Dropped below 60% in two core courses",
+    ],
+    nextStep: "Call today and reserve same-week advising slot",
   },
   {
     initials: "JC",
@@ -45,6 +54,15 @@ const alerts = [
     risk: "Medium Risk",
     signals: "Declining attendance - 2 weeks inactive",
     tint: "medium",
+    momentum: "Stable",
+    momentumTrend: "stable",
+    lastContact: "Email follow-up 2 days ago",
+    whyFlagged: [
+      "Attendance trend declined 14% in 2 weeks",
+      "No tutoring visits since Jan 29",
+      "Homework completion dropped to 72%",
+    ],
+    nextStep: "Send structured study plan and set check-in this week",
   },
   {
     initials: "EP",
@@ -53,6 +71,15 @@ const alerts = [
     risk: "Watch List",
     signals: "Late assignment trend - Reduced campus engagement",
     tint: "watch",
+    momentum: "Improving",
+    momentumTrend: "up",
+    lastContact: "Office-hours call 4 days ago",
+    whyFlagged: [
+      "3 late submissions in past 10 days",
+      "Student club activity fell by half",
+      "Risk score still above watch threshold",
+    ],
+    nextStep: "Keep weekly check-ins and monitor assignment timing",
   },
 ];
 
@@ -68,6 +95,30 @@ const workload = [
   { initials: "JT", name: "Jennifer Taylor", role: "Academic Advisor", count: "128" },
   { initials: "RP", name: "Robert Park", role: "Academic Advisor", count: "135" },
   { initials: "LC", name: "Lisa Chen", role: "Academic Advisor", count: "119" },
+];
+
+const communicationHistory = [
+  {
+    student: "Sarah Mitchell",
+    when: "Today, 9:10 AM",
+    channel: "SMS + voicemail",
+    owner: "Dr. Martinez",
+    outcome: "No response yet",
+  },
+  {
+    student: "James Chen",
+    when: "Yesterday, 3:40 PM",
+    channel: "Advisor email",
+    owner: "Robert Park",
+    outcome: "Confirmed meeting for Feb 13",
+  },
+  {
+    student: "Emily Parker",
+    when: "Feb 10, 11:15 AM",
+    channel: "Office-hours call",
+    owner: "Lisa Chen",
+    outcome: "Action plan agreed",
+  },
 ];
 
 function DashboardCommandCenter() {
@@ -169,6 +220,12 @@ function DashboardCommandCenter() {
                 <p className="alert-meta">
                   <span>{alert.risk}</span> {alert.signals}
                 </p>
+                <p className="alert-context">
+                  <span className={`momentum-badge ${alert.momentumTrend}`}>
+                    {alert.momentum}
+                  </span>
+                  <strong>Last Contact:</strong> {alert.lastContact}
+                </p>
               </div>
               <div className="alert-actions">
                 <button type="button" className="ghost-pill">
@@ -224,6 +281,40 @@ function DashboardCommandCenter() {
                   <strong>{item.count}</strong>
                   <span>students</span>
                 </div>
+              </li>
+            ))}
+          </ul>
+        </article>
+      </section>
+
+      <section className="cc-bottom">
+        <article className="card detail-panel">
+          <h2>Why Flagged</h2>
+          <ul className="flagged-list">
+            {alerts.map((alert) => (
+              <li key={`${alert.name}-flagged`}>
+                <p className="flagged-title">{alert.name}</p>
+                <p className="flagged-summary">{alert.risk}</p>
+                <ul className="flagged-reasons">
+                  {alert.whyFlagged.map((reason) => (
+                    <li key={`${alert.name}-${reason}`}>{reason}</li>
+                  ))}
+                </ul>
+                <p className="flagged-next">
+                  <strong>Recommended next step:</strong> {alert.nextStep}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <article className="card detail-panel">
+          <h2>Last Contact & Communication History</h2>
+          <ul className="timeline-list">
+            {communicationHistory.map((item) => (
+              <li key={`${item.student}-${item.when}`}>
+                <strong>{item.student}</strong>: {item.when} - {item.channel} ({item.owner}) -{" "}
+                {item.outcome}
               </li>
             ))}
           </ul>
